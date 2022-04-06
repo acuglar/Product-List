@@ -5,6 +5,7 @@ import { Input, Button } from '@mui/material';
 
 export default class App extends Component {
 	state = {
+		name: '',
 		products: [
 			{ id: 1, name: 'Hamburguer', category: 'Sanduíches', price: 7.99 },
 			{ id: 2, name: 'X-Burguer', category: 'Sanduíches', price: 8.99 },
@@ -17,15 +18,35 @@ export default class App extends Component {
 		filteredProducts: [],
 		currentSale: { total: 0, saleDetails: [] },
 	};
+
+	showProducts = () => {
+		const { name, products } = this.state;
+		const re = new RegExp(name, 'i');
+		this.setState({
+			filteredProducts: products.filter(product => re.test(product.name)),
+		});
+	};
+
 	render() {
 		return (
 			<div className='App'>
 				<main className='App-main'>
 					<div>
-						<Input autoFocus={true} />
-						<Button variant='contained'>Pesquisar</Button>
+						<Input
+							onChange={e => this.setState({ name: e.target.value })}
+							autoFocus={true}
+						/>
+						<Button onClick={this.showProducts} variant='contained'>
+							Pesquisar
+						</Button>
 					</div>
-					<MenuContainer products={this.state.products} />
+					<MenuContainer
+						products={
+							this.state.filteredProducts.length
+								? this.state.filteredProducts
+								: this.state.products
+						}
+					/>
 				</main>
 			</div>
 		);
