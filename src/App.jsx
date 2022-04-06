@@ -19,7 +19,7 @@ export default class App extends Component {
 		currentSale: { total: 0, saleDetails: [] },
 	};
 
-	showProducts = () => {
+	filterProducts = () => {
 		const { name, products } = this.state;
 		const re = new RegExp(name, 'i');
 		this.setState({
@@ -36,7 +36,7 @@ export default class App extends Component {
 							onChange={e => this.setState({ name: e.target.value })}
 							autoFocus={true}
 						/>
-						<Button onClick={this.showProducts} variant='contained'>
+						<Button onClick={this.filterProducts} variant='contained'>
 							Pesquisar
 						</Button>
 					</div>
