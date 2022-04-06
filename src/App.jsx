@@ -1,6 +1,7 @@
 import './App.css';
 import { Component } from 'react';
 import MenuContainer from './components/MenuContainer';
+import { Input, Button } from '@mui/material';
 
 export default class App extends Component {
 	state = {
@@ -19,9 +20,13 @@ export default class App extends Component {
 	render() {
 		return (
 			<div className='App'>
-				<header className='App-header'>
+				<main className='App-main'>
+					<div>
+						<Input autoFocus={true} />
+						<Button variant='contained'>Pesquisar</Button>
+					</div>
 					<MenuContainer products={this.state.products} />
-				</header>
+				</main>
 			</div>
 		);
 	}

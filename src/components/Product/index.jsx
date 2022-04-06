@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Button } from '@mui/material';
 
 export default class Product extends Component {
 	render() {
@@ -7,7 +8,7 @@ export default class Product extends Component {
 				<h3>{this.props.name}</h3>
 				<p>{this.props.category}</p>
 				<p>{this.props.price}</p>
-				<button>Adicionar</button>
+				<Button variant='outlined'>Adicionar</Button>
 			</div>
 		);
 	}
