@@ -39,13 +39,17 @@ export default class App extends Component {
 
 		this.setState({
 			currentSale: {
-				...this.state.currentSale,
 				saleDetails: [...this.state.currentSale.saleDetails, findedProduct],
+				total: this.state.currentSale.total + findedProduct.price,
 			},
 		});
 	};
 
 	removeProduct = productId => {
+		const findedProduct = this.state.products.find(
+			product => product.id === productId,
+		);
+
 		const saleDetailsExcludedProductId =
 			this.state.currentSale.saleDetails.filter(
 				product => product.id !== productId,
@@ -53,8 +57,8 @@ export default class App extends Component {
 
 		this.setState({
 			currentSale: {
-				...this.state.currentSale,
 				saleDetails: saleDetailsExcludedProductId,
+				total: this.state.currentSale.total - findedProduct.price,
 			},
 		});
 	};
@@ -80,11 +84,16 @@ export default class App extends Component {
 						}
 						addProduct={this.addProduct}
 					/>
-					<MenuContainer
-						products={this.state.currentSale.saleDetails}
-						removeProduct={this.removeProduct}
-						cart={true}
-					/>
+					<div>
+						<div>
+							<h1>SubTotal: {+this.state.currentSale.total.toFixed(2)}</h1>
+						</div>
+						<MenuContainer
+							products={this.state.currentSale.saleDetails}
+							removeProduct={this.removeProduct}
+							cart={true}
+						/>
+					</div>
 				</main>
 			</div>
 		);
