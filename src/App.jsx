@@ -10,7 +10,7 @@ export default class App extends Component {
 			{ id: 1, name: 'Hamburguer', category: 'Sanduíches', price: 7.99 },
 			{ id: 2, name: 'X-Burguer', category: 'Sanduíches', price: 8.99 },
 			{ id: 3, name: 'X-Salada', category: 'Sanduíches', price: 10.99 },
-			{ id: 4, name: 'Big Kenzie', category: 'Sanduíches', price: 16.99 },
+			{ id: 4, name: 'Big-big', category: 'Sanduíches', price: 16.99 },
 			{ id: 5, name: 'Guaraná', category: 'Bebidas', price: 4.99 },
 			{ id: 6, name: 'Coca', category: 'Bebidas', price: 4.99 },
 			{ id: 7, name: 'Fanta', category: 'Bebidas', price: 4.99 },
@@ -22,8 +22,26 @@ export default class App extends Component {
 	filterProducts = () => {
 		const { name, products } = this.state;
 		const re = new RegExp(name, 'i');
+
 		this.setState({
 			filteredProducts: products.filter(product => re.test(product.name)),
+		});
+	};
+
+	addProduct = productId => {
+		const findProduct = this.state.products.find(
+			product => product.id === productId,
+		);
+
+		if (this.state.currentSale.saleDetails.includes(findProduct)) {
+			return;
+		}
+
+		this.setState({
+			currentSale: {
+				...this.state.currentSale,
+				saleDetails: [...this.state.currentSale.saleDetails, findProduct],
+			},
 		});
 	};
 
@@ -46,6 +64,11 @@ export default class App extends Component {
 								? this.state.filteredProducts
 								: this.state.products
 						}
+						addProduct={this.addProduct}
+					/>
+					<MenuContainer
+						products={this.state.currentSale.saleDetails}
+						cart={true}
 					/>
 				</main>
 			</div>

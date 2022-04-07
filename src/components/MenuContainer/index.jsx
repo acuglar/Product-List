@@ -8,9 +8,12 @@ export default class MenuContainer extends Component {
 				{this.props.products.map((product, index) => (
 					<Product
 						key={index}
+						id={product.id}
 						name={product.name}
 						category={product.category}
 						price={product.price}
+						addProduct={this.props.addProduct}
+						cart={this.props.cart}
 					/>
 				))}
 			</div>
