@@ -67,7 +67,7 @@ export default class App extends Component {
 		return (
 			<div className='App'>
 				<main className='App-main'>
-					<div>
+					<div className='search-container'>
 						<Input
 							onChange={e => this.setState({ name: e.target.value })}
 							autoFocus={true}
