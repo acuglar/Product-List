@@ -16,3 +16,9 @@
 .search-container {
 	margin: 44px 0;
 }
+
+.cart {
+	display: flex;
+	width: 90%;
+	margin-top: 44px;
+}

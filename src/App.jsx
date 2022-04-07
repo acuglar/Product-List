@@ -84,9 +84,9 @@ export default class App extends Component {
 						}
 						addProduct={this.addProduct}
 					/>
-					<div>
+					<div className='cart'>
 						<div>
-							<h1>SubTotal: {+this.state.currentSale.total.toFixed(2)}</h1>
+							<h2>SubTotal: {+this.state.currentSale.total.toFixed(2)}</h2>
 						</div>
 						<MenuContainer
 							products={this.state.currentSale.saleDetails}
