@@ -29,18 +29,32 @@ export default class App extends Component {
 	};
 
 	addProduct = productId => {
-		const findProduct = this.state.products.find(
+		const findedProduct = this.state.products.find(
 			product => product.id === productId,
 		);
 
-		if (this.state.currentSale.saleDetails.includes(findProduct)) {
+		if (this.state.currentSale.saleDetails.includes(findedProduct)) {
 			return;
 		}
 
 		this.setState({
 			currentSale: {
 				...this.state.currentSale,
-				saleDetails: [...this.state.currentSale.saleDetails, findProduct],
+				saleDetails: [...this.state.currentSale.saleDetails, findedProduct],
+			},
+		});
+	};
+
+	removeProduct = productId => {
+		const saleDetailsExcludedProductId =
+			this.state.currentSale.saleDetails.filter(
+				product => product.id !== productId,
+			);
+
+		this.setState({
+			currentSale: {
+				...this.state.currentSale,
+				saleDetails: saleDetailsExcludedProductId,
 			},
 		});
 	};
@@ -68,6 +82,7 @@ export default class App extends Component {
 					/>
 					<MenuContainer
 						products={this.state.currentSale.saleDetails}
+						removeProduct={this.removeProduct}
 						cart={true}
 					/>
 				</main>

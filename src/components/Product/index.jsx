@@ -10,7 +10,11 @@ export default class Product extends Component {
 				<p>{this.props.price}</p>
 
 				<Button
-					onClick={() => this.props.addProduct(this.props.id)}
+					onClick={
+						!this.props.cart
+							? () => this.props.addProduct(this.props.id)
+							: () => this.props.removeProduct(this.props.id)
+					}
 					variant='outlined'>
 					{!this.props.cart ? 'Adicionar' : 'Remover'}
 				</Button>

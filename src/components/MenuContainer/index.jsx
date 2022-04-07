@@ -13,6 +13,7 @@ export default class MenuContainer extends Component {
 						category={product.category}
 						price={product.price}
 						addProduct={this.props.addProduct}
+						removeProduct={this.props.removeProduct}
 						cart={this.props.cart}
 					/>
 				))}
