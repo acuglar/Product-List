@@ -29,41 +29,39 @@ export default class App extends Component {
 	};
 
 	addProduct = productId => {
-		const findedProduct = this.state.products.find(
-			product => product.id === productId,
-		);
+		const { products, currentSale } = this.state;
+		const findedProduct = products.find(product => product.id === productId);
 
-		if (this.state.currentSale.saleDetails.includes(findedProduct)) {
+		if (currentSale.saleDetails.includes(findedProduct)) {
 			return;
 		}
 
 		this.setState({
 			currentSale: {
-				saleDetails: [...this.state.currentSale.saleDetails, findedProduct],
-				total: this.state.currentSale.total + findedProduct.price,
+				saleDetails: [...currentSale.saleDetails, findedProduct],
+				total: currentSale.total + findedProduct.price,
 			},
 		});
 	};
 
 	removeProduct = productId => {
-		const findedProduct = this.state.products.find(
-			product => product.id === productId,
-		);
+		const { products, currentSale } = this.state;
+		const findedProduct = products.find(product => product.id === productId);
 
-		const saleDetailsExcludedProductId =
-			this.state.currentSale.saleDetails.filter(
-				product => product.id !== productId,
-			);
+		const saleDetailsExcludedProductId = currentSale.saleDetails.filter(
+			product => product.id !== productId,
+		);
 
 		this.setState({
 			currentSale: {
 				saleDetails: saleDetailsExcludedProductId,
-				total: this.state.currentSale.total - findedProduct.price,
+				total: currentSale.total - findedProduct.price,
 			},
 		});
 	};
 
 	render() {
+		const { products, filteredProducts, currentSale } = this.state;
 		return (
 			<div className='App'>
 				<main className='App-main'>
@@ -77,19 +75,15 @@ export default class App extends Component {
 						</Button>
 					</div>
 					<MenuContainer
-						products={
-							this.state.filteredProducts.length
-								? this.state.filteredProducts
-								: this.state.products
-						}
+						products={filteredProducts.length ? filteredProducts : products}
 						addProduct={this.addProduct}
 					/>
 					<div className='cart'>
 						<div>
-							<h2>SubTotal: {+this.state.currentSale.total.toFixed(2)}</h2>
+							<h2>SubTotal: {+currentSale.total.toFixed(2)}</h2>
 						</div>
 						<MenuContainer
-							products={this.state.currentSale.saleDetails}
+							products={currentSale.saleDetails}
 							removeProduct={this.removeProduct}
 							cart={true}
 						/>

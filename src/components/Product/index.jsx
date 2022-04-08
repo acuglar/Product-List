@@ -3,20 +3,18 @@ import { Button } from '@mui/material';
 
 export default class Product extends Component {
 	render() {
+		const { id, name, category, price, cart, addProduct, removeProduct } =
+			this.props;
 		return (
-			<div key={this.props.id} id={this.props.id}>
-				<h3>{this.props.name}</h3>
-				<p>{this.props.category}</p>
-				<p>{this.props.price}</p>
+			<div key={id} id={id}>
+				<h3>{name}</h3>
+				<p>{category}</p>
+				<p>{price}</p>
 
 				<Button
-					onClick={
-						!this.props.cart
-							? () => this.props.addProduct(this.props.id)
-							: () => this.props.removeProduct(this.props.id)
-					}
+					onClick={!cart ? () => addProduct(id) : () => removeProduct(id)}
 					variant='outlined'>
-					{!this.props.cart ? 'Adicionar' : 'Remover'}
+					{!cart ? 'Adicionar' : 'Remover'}
 				</Button>
 			</div>
 		);
